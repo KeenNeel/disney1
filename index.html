@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🌊 TDS完全ガイド 2026年6月29日</title>
+<style>
+  :root {
+    --sea-deep: #0a2744;
+    --jubilee-blue: #1565c0;
+    --ocean-mid: #1976d2;
+    --sparkle: #64b5f6;
+    --gold: #ffd54f;
+    --gold-dark: #f9a825;
+    --coral: #ef6c00;
+    --white: #ffffff;
+    --off-white: #f0f6ff;
+    --text-main: #1a2540;
+    --text-sub: #546080;
+    --card-bg: #ffffff;
+    --card-shadow: 0 2px 12px rgba(21,101,192,0.10);
+    --tab-h: 52px;
+    --header-h: 64px;
+    --radius: 14px;
+    --tag-hot: #e53935;
+    --tag-free: #2e7d32;
+    --tag-pay: #1565c0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow-x: hidden; }
+
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: var(--off-white);
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--header-h);
+    background: linear-gradient(135deg, var(--sea-deep) 0%, var(--jubilee-blue) 100%);
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    box-shadow: 0 2px 12px rgba(10,39,68,0.4);
+  }
+  header h1 {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  .header-badge {
+    background: var(--gold);
+    color: var(--sea-deep);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ===== TAB NAV ===== */
+  nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0; z-index: 99;
+    background: var(--sea-deep);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
+    height: var(--tab-h);
+    border-bottom: 2px solid var(--jubilee-blue);
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 0 14px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .tab-btn .tab-icon { font-size: 18px; }
+  .tab-btn.active {
+    color: var(--gold);
+    background: rgba(255,213,79,0.08);
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 3px 3px 0 0;
+  }
+
+  /* ===== CONTENT AREA ===== */
+  main {
+    margin-top: calc(var(--header-h) + var(--tab-h));
+    padding: 12px;
+    min-height: calc(100vh - var(--header-h) - var(--tab-h));
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 14px;
+    margin-bottom: 12px;
+    border-left: 4px solid var(--jubilee-blue);
+  }
+  .card.gold { border-left-color: var(--gold-dark); }
+  .card.coral { border-left-color: var(--coral); }
+  .card.green { border-left-color: #2e7d32; }
+  .card.red { border-left-color: #c62828; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--sea-deep);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .card-title .emoji { font-size: 18px; }
+
+  .section-head {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--jubilee-blue);
+    border-bottom: 2px solid var(--sparkle);
+    padding-bottom: 4px;
+    margin: 14px 0 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== TAGS ===== */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin: 2px 2px 2px 0;
+    white-space: nowrap;
+  }
+  .tag-hot { background: #ffebee; color: var(--tag-hot); border: 1px solid #ef9a9a; }
+  .tag-free { background: #e8f5e9; color: var(--tag-free); border: 1px solid #a5d6a7; }
+  .tag-pay { background: #e3f2fd; color: var(--tag-pay); border: 1px solid #90caf9; }
+  .tag-dpa { background: #fff3e0; color: var(--coral); border: 1px solid #ffcc80; }
+  .tag-new { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; }
+  .tag-gray { background: #f5f5f5; color: #616161; border: 1px solid #e0e0e0; }
+  .tag-gold { background: #fff8e1; color: #7c5100; border: 1px solid #ffe082; }
+
+  /* ===== TABLE ===== */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .tbl th {
+    background: var(--sea-deep);
+    color: var(--white);
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+  }
+  .tbl td {
+    padding: 7px 8px;
+    border-bottom: 1px solid #e3eaf4;
+    vertical-align: top;
+  }
+  .tbl tr:nth-child(even) td { background: #f5f9ff; }
+  .tbl tr:last-child td { border-bottom: none; }
+
+  /* ===== ATTRACTION ROWS ===== */
+  .attr-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e8eef7;
+  }
+  .attr-row:last-child { border-bottom: none; }
+  .attr-rank {
+    flex: 0 0 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--jubilee-blue);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .attr-rank.gold-rank { background: var(--gold-dark); color: var(--sea-deep); }
+  .attr-info { flex: 1; }
+  .attr-name { font-size: 14px; font-weight: 800; color: var(--text-main); }
+  .attr-area { font-size: 11px; color: var(--text-sub); margin-bottom: 3px; }
+  .attr-wait { font-size: 12px; color: var(--coral); font-weight: 700; }
+  .attr-tip {
+    font-size: 11px;
+    color: var(--text-sub);
+    background: #f0f6ff;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-top: 4px;
+  }
+
+  /* ===== INFO BOX ===== */
+  .info-box {
+    background: linear-gradient(135deg, #e3f2fd, #e8f5e9);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .warn-box {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .danger-box {
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  /* ===== LINK BUTTON ===== */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid #dce8f8;
+  }
+  .link-card:active { transform: scale(0.98); box-shadow: 0 1px 6px rgba(21,101,192,0.12); }
+  .link-icon {
+    font-size: 28px;
+    flex: 0 0 42px;
+    text-align: center;
+  }
+  .link-info .link-title { font-size: 14px; font-weight: 800; color: var(--sea-deep); }
+  .link-info .link-desc { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+  .link-arrow { margin-left: auto; color: var(--sparkle); font-size: 18px; }
+
+  /* ===== SHOW CARD ===== */
+  .show-card {
+    background: linear-gradient(135deg, var(--sea-deep) 0%, #1a3a6a 100%);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .show-name { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+  .show-meta { font-size: 11px; color: var(--sparkle); margin-bottom: 8px; }
+  .show-desc { font-size: 12px; color: rgba(255,255,255,0.85); margin-bottom: 8px; }
+  .show-tip {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: var(--gold);
+  }
+
+  /* ===== POPCORN CARD ===== */
+  .pc-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 6px rgba(21,101,192,0.08);
+    border: 1px solid #e3eaf4;
+  }
+  .pc-emoji { font-size: 28px; flex: 0 0 36px; text-align: center; }
+  .pc-info { flex: 1; }
+  .pc-name { font-size: 13px; font-weight: 800; color: var(--sea-deep); }
+  .pc-spot { font-size: 11px; color: var(--text-sub); }
+  .pc-price { font-size: 12px; font-weight: 800; color: var(--coral); white-space: nowrap; }
+
+  /* ===== SOUV CARD ===== */
+  .souv-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #e3eaf4;
+  }
+  .souv-name { font-size: 14px; font-weight: 800; color: var(--sea-deep); }
+  .souv-price { font-size: 12px; color: var(--coral); font-weight: 700; }
+  .souv-desc { font-size: 11px; color: var(--text-sub); margin-top: 4px; }
+  .souv-voice {
+    font-size: 11px;
+    color: #4a148c;
+    background: #f3e5f5;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ===== EMERGENCY ===== */
+  .emg-card {
+    display: flex;
+    gap: 12px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid var(--tag-hot);
+  }
+  .emg-icon { font-size: 30px; flex: 0 0 40px; text-align: center; }
+  .emg-title { font-size: 14px; font-weight: 800; color: var(--tag-hot); margin-bottom: 4px; }
+  .emg-desc { font-size: 12px; color: var(--text-sub); }
+  .emg-loc { font-size: 12px; color: var(--jubilee-blue); font-weight: 700; margin-top: 4px; }
+
+  .tel-btn {
+    display: inline-block;
+    background: #e53935;
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* ===== STARS ===== */
+  .stars { color: var(--gold-dark); font-size: 12px; }
+
+  /* ===== TIMETABLE SECTION ===== */
+  .tt-card {
+    display: flex;
+    gap: 12px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #dce8f8;
+  }
+  .tt-icon { font-size: 26px; flex: 0 0 36px; text-align: center; }
+  .tt-title { font-size: 13px; font-weight: 800; color: var(--sea-deep); }
+  .tt-desc { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
+  .tt-link {
+    display: inline-block;
+    margin-top: 6px;
+    background: var(--jubilee-blue);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+  }
+
+  /* ===== FOOTER ===== */
+  .page-footer {
+    text-align: center;
+    font-size: 10px;
+    color: var(--text-sub);
+    padding: 20px 12px 30px;
+  }
+
+  /* ===== UTILITIES ===== */
+  .mt8 { margin-top: 8px; }
+  .mt12 { margin-top: 12px; }
+  .bold { font-weight: 800; }
+  .sub { font-size: 11px; color: var(--text-sub); }
+  ul.tip-list { padding-left: 16px; }
+  ul.tip-list li { margin-bottom: 4px; font-size: 12px; }
+  .price-chip {
+    display: inline-block;
+    background: #fff3e0;
+    color: var(--coral);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 4px;
+  }
+  .time-chip {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 4px;
+  }
+  .pop-star { color: var(--gold-dark); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <span style="font-size:22px">🌊</span>
+  <h1>TDS完全ガイド</h1>
+  <span class="header-badge">📅 2026/6/29</span>
+  <span class="header-badge">🎉 25周年</span>
+</header>
+
+<!-- TAB NAV -->
+<nav id="tab-nav">
+  <button class="tab-btn active" data-tab="tab-ride" onclick="switchTab('tab-ride', this)">
+    <span class="tab-icon">🎢</span>乗り物
+  </button>
+  <button class="tab-btn" data-tab="tab-gourmet" onclick="switchTab('tab-gourmet', this)">
+    <span class="tab-icon">🍽️</span>グルメ
+  </button>
+  <button class="tab-btn" data-tab="tab-popcorn" onclick="switchTab('tab-popcorn', this)">
+    <span class="tab-icon">🍿</span>ポップコーン
+  </button>
+  <button class="tab-btn" data-tab="tab-souvenir" onclick="switchTab('tab-souvenir', this)">
+    <span class="tab-icon">🛍️</span>お土産
+  </button>
+  <button class="tab-btn" data-tab="tab-show" onclick="switchTab('tab-show', this)">
+    <span class="tab-icon">🎭</span>ショー
+  </button>
+  <button class="tab-btn" data-tab="tab-help" onclick="switchTab('tab-help', this)">
+    <span class="tab-icon">🆘</span>お困り
+  </button>
+  <button class="tab-btn" data-tab="tab-links" onclick="switchTab('tab-links', this)">
+    <span class="tab-icon">🔗</span>便利リンク
+  </button>
+  <button class="tab-btn" data-tab="tab-train" onclick="switchTab('tab-train', this)">
+    <span class="tab-icon">🚃</span>時刻表
+  </button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+
+<!-- =========================================================
+     TAB 1: 乗り物・アトラクション
+========================================================= -->
+<div id="tab-ride" class="tab-panel active">
+
+  <div class="danger-box">
+    <span class="bold">⚠️ 本日の注意事項（2026/6/29）</span><br>
+    スカイ・フル・オブ・カラーズは<strong>6/15〜9/14 休止中</strong>。6月は比較的空いているが、6月末（本日）はイベント最終週でやや混雑増。月曜朝は比較的スムーズ！
+  </div>
+
+  <div class="warn-box">
+    <span class="bold">💡 今日の攻略タイムライン</span><br>
+    🌅 <strong>開園直後</strong>：ファンタジースプリングス（アナ・エルサ）へダッシュ → DPA購入<br>
+    ☀️ <strong>10〜13時</strong>：ソアリン／ラプンツェル<br>
+    🍽️ <strong>13〜14時</strong>：モバイルオーダーで昼食<br>
+    🌆 <strong>14〜17時</strong>：中規模アトラクション消化<br>
+    🌙 <strong>17時〜閉園</strong>：ビリーヴ！事前鑑賞スポット確保＋夜ショー
+  </div>
+
+  <!-- DPA/パス説明 -->
+  <div class="card gold">
+    <div class="card-title"><span class="emoji">🎫</span>パス制度まとめ</div>
+    <table class="tbl">
+      <tr><th>種類</th><th>料金</th><th>特徴</th></tr>
+      <tr><td><span class="tag tag-pay">DPA</span><br>ディズニー・プレミアアクセス</td><td>¥1,500〜2,500</td><td>入園後アプリで購入。人気アトラクションの待ち時間を大幅短縮。午前中に売り切れ注意</td></tr>
+      <tr><td><span class="tag tag-free">スタンバイパス</span></td><td>無料</td><td>一部施設に入場整理券（現在ほぼ廃止。FS一部で残存）</td></tr>
+      <tr><td><span class="tag tag-gray">シングルライダー</span></td><td>無料</td><td>2026年1月から一部対応。実施時間帯・日あり</td></tr>
+    </table>
+  </div>
+
+  <!-- 混雑時間帯 -->
+  <div class="card">
+    <div class="card-title"><span class="emoji">⏰</span>混雑時間帯ガイド</div>
+    <table class="tbl">
+      <tr><th>時間帯</th><th>混雑度</th><th>おすすめ行動</th></tr>
+      <tr><td>開園〜10時</td><td>🟢 空</td><td>FS・ソアリン優先</td></tr>
+      <tr><td>10〜13時</td><td>🟡 やや混</td><td>DPA使用・中型消化</td></tr>
+      <tr><td>13〜15時</td><td>🔴 最混雑</td><td>レストラン・ショップ・休憩</td></tr>
+      <tr><td>15〜17時</td><td>🟡 やや混</td><td>屋内系・ショー鑑賞</td></tr>
+      <tr><td>17時〜閉園</td><td>🟢 緩和</td><td>ナイトショー・夜映えスポット</td></tr>
+    </table>
+    <div class="sub mt8">※梅雨の雨天日はさらに空く傾向。晴れた月曜は学校ありで比較的緩和</div>
+  </div>
+
+  <!-- ファンタジースプリングス -->
+  <p class="section-head">🏰 ファンタジースプリングス（最重要エリア）</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">アナとエルサのフローズンジャーニー</div>
+      <div class="attr-area">📍 ファンタジースプリングス｜ボートライド約8分</div>
+      <span class="tag tag-dpa">DPA対象 ¥2,500</span>
+      <div class="attr-wait">混雑時 90〜120分超</div>
+      <div class="attr-tip">💡 開園直後に並ぶかDPAを即購入。アレンデール城の中を進む唯一の体験。絶対押さえたい！</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">ラプンツェルのランタンフェスティバル</div>
+      <div class="attr-area">📍 ファンタジースプリングス｜ボートライド約5分</div>
+      <span class="tag tag-dpa">DPA対象 ¥2,000</span>
+      <div class="attr-wait">混雑時 60〜90分</div>
+      <div class="attr-tip">💡 夜空を舞うランタンが幻想的。ロマンチック度No.1。DPAで確実に乗るのが◎</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">3</div>
+    <div class="attr-info">
+      <div class="attr-name">ピーターパンのネバーランドアドベンチャー</div>
+      <div class="attr-area">📍 ファンタジースプリングス｜ライドタイプ約6分</div>
+      <span class="tag tag-dpa">DPA対象 ¥2,000</span>
+      <div class="attr-wait">混雑時 60〜90分</div>
+      <div class="attr-tip">💡 海賊と戦う壮大な体験。12名乗り。DPA推奨</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">4</div>
+    <div class="attr-info">
+      <div class="attr-name">フェアリー・ティンカーベルのビジーバギー</div>
+      <div class="attr-area">📍 ファンタジースプリングス｜ライドタイプ</div>
+      <span class="tag tag-free">スタンバイのみ</span>
+      <div class="attr-wait">混雑時 40〜60分</div>
+      <div class="attr-tip">💡 縦横無尽に動くバギーで妖精の谷を巡る。比較的乗りやすい。家族向け◎</div>
+    </div>
+  </div>
+
+  <!-- ソアリン -->
+  <p class="section-head">🌊 メディテレーニアンハーバー</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">ソアリン：ファンタスティック・フライト</div>
+      <div class="attr-area">📍 メディテレーニアンハーバー｜空飛ぶ体験約13分</div>
+      <span class="tag tag-dpa">DPA対象 ¥2,000</span>
+      <div class="attr-wait">混雑時 90〜120分</div>
+      <div class="attr-tip">💡 開園直後 or DPAが鉄則。世界の絶景を空から疑似体験。圧倒的人気！</div>
+    </div>
+  </div>
+
+  <!-- マーメイドラグーン -->
+  <p class="section-head">🧜 マーメイドラグーン</p>
+
+  <div class="attr-row">
+    <div class="attr-rank">1</div>
+    <div class="attr-info">
+      <div class="attr-name">アリエルのプレイグラウンド</div>
+      <div class="attr-area">📍 マーメイドラグーン｜ウォークスルー型</div>
+      <span class="tag tag-free">待ちなし</span>
+      <div class="attr-tip">💡 雨の日も安心な屋内。アリエルの世界を探索。小さなお子さまに大人気</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">2</div>
+    <div class="attr-info">
+      <div class="attr-name">スカットルのスクーター</div>
+      <div class="attr-area">📍 マーメイドラグーン｜回転ライド</div>
+      <span class="tag tag-free">待ちなし〜15分</span>
+      <div class="attr-tip">💡 ファミリー向け。午後狙いで待ち短縮</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">3</div>
+    <div class="attr-info">
+      <div class="attr-name">ブローフィッシュ・バルーンレース</div>
+      <div class="attr-area">📍 マーメイドラグーン｜回転ライド</div>
+      <span class="tag tag-free">10〜20分</span>
+      <div class="attr-tip">💡 子ども向け。午前中が比較的空き</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">4</div>
+    <div class="attr-info">
+      <div class="attr-name">フランダーのフライングフィッシュコースター</div>
+      <div class="attr-area">📍 マーメイドラグーン｜コースター（90cm以上）</div>
+      <span class="tag tag-free">15〜30分</span>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">5</div>
+    <div class="attr-info">
+      <div class="attr-name">ジャンピン・ジェリーフィッシュ</div>
+      <div class="attr-area">📍 マーメイドラグーン｜浮遊型ライド</div>
+      <span class="tag tag-free">10〜20分</span>
+    </div>
+  </div>
+
+  <!-- アラビアンコースト -->
+  <p class="section-head">🕌 アラビアンコースト</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">マジックランプシアター</div>
+      <div class="attr-area">📍 アラビアンコースト｜3D映像ショー約20分</div>
+      <span class="tag tag-free">自由鑑賞</span>
+      <div class="attr-wait">次回公演に合わせ並ぶ</div>
+      <div class="attr-tip">💡 ジーニーの魔法を体験。午後の休憩がてら最適。3D眼鏡あり</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">2</div>
+    <div class="attr-info">
+      <div class="attr-name">シンドバッド・ストーリーブック・ヴォヤッジ</div>
+      <div class="attr-area">📍 アラビアンコースト｜ボートライド約10分</div>
+      <span class="tag tag-free">10〜30分</span>
+      <div class="attr-tip">💡 穏やかで家族全員乗れる。「ウィズ・ユー」の歌が耳から離れない</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">3</div>
+    <div class="attr-info">
+      <div class="attr-name">ジャスミンのフライングカーペット</div>
+      <div class="attr-area">📍 アラビアンコースト｜回転ライド</div>
+      <span class="tag tag-free">10〜20分</span>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">4</div>
+    <div class="attr-info">
+      <div class="attr-name">アリババのコインゲーム</div>
+      <div class="attr-area">📍 アラビアンコースト｜ゲームアトラクション</div>
+      <span class="tag tag-free">待ち短め</span>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">5</div>
+    <div class="attr-info">
+      <div class="attr-name">アブーズ・バザール（25周年仕様）</div>
+      <div class="attr-area">📍 アラビアンコースト｜ゲーム施設</div>
+      <span class="tag tag-new">25周年景品</span>
+      <div class="attr-tip">💡 成功でジュビリーブルーのミッキー・ミニーフィギュアGET！</div>
+    </div>
+  </div>
+
+  <!-- ミステリアスアイランド -->
+  <p class="section-head">🌋 ミステリアスアイランド</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">センター・オブ・ジ・アース</div>
+      <div class="attr-area">📍 ミステリアスアイランド｜絶叫ライド（117cm以上）</div>
+      <span class="tag tag-dpa">DPA対象</span>
+      <div class="attr-wait">混雑時 80〜100分</div>
+      <div class="attr-tip">💡 シーNo.1スリル系。最後の急降下が圧巻！DPA推奨。早朝は比較的空く</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">2</div>
+    <div class="attr-info">
+      <div class="attr-name">海底2万マイル</div>
+      <div class="attr-area">📍 ミステリアスアイランド｜潜水艦ライド</div>
+      <span class="tag tag-free">20〜40分</span>
+      <div class="attr-tip">💡 午後の混雑が比較的少ない穴場。神秘的な海底世界</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">3</div>
+    <div class="attr-info">
+      <div class="attr-name">フォートレス・エクスプロレーション</div>
+      <div class="attr-area">📍 ミステリアスアイランド付近｜体験型施設</div>
+      <span class="tag tag-free">常時開放</span>
+      <div class="attr-tip">💡 待ちなし！隠された仕掛けを探す体験型。休憩がてら◎</div>
+    </div>
+  </div>
+
+  <!-- ロストリバーデルタ -->
+  <p class="section-head">🏺 ロストリバーデルタ</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">インディ・ジョーンズ・アドベンチャー：クリスタルスカルの魔宮</div>
+      <div class="attr-area">📍 ロストリバーデルタ｜ジープライド（117cm以上）</div>
+      <span class="tag tag-dpa">DPA対象</span>
+      <div class="attr-wait">混雑時 60〜90分</div>
+      <div class="attr-tip">💡 DPA推奨。シングルライダー対応（2026年1月〜）も活用可</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">2</div>
+    <div class="attr-info">
+      <div class="attr-name">レイジングスピリッツ</div>
+      <div class="attr-area">📍 ロストリバーデルタ｜コースター（117cm以上）</div>
+      <span class="tag tag-free">30〜60分</span>
+      <div class="attr-tip">💡 360度回転あり！雨の日は運休注意。開園直後か夕方が狙い目</div>
+    </div>
+  </div>
+
+  <!-- アメリカンウォーターフロント -->
+  <p class="section-head">🗽 アメリカンウォーターフロント</p>
+
+  <div class="attr-row">
+    <div class="attr-rank gold-rank">👑</div>
+    <div class="attr-info">
+      <div class="attr-name">タワー・オブ・テラー</div>
+      <div class="attr-area">📍 アメリカンウォーターフロント｜フリーフォール（102cm以上）</div>
+      <span class="tag tag-dpa">DPA対象</span>
+      <div class="attr-wait">混雑時 60〜90分</div>
+      <div class="attr-tip">💡 シーの顔！ストーリー付き落下系。DPA or 早朝が◎。心臓に自信のある方限定</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">2</div>
+    <div class="attr-info">
+      <div class="attr-name">トイストーリー・マニア！</div>
+      <div class="attr-area">📍 アメリカンウォーターフロント｜シューティングゲーム</div>
+      <span class="tag tag-free">30〜60分</span>
+      <div class="attr-tip">💡 点数を競うシューティング。夕方以降は列が落ち着く傾向</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">3</div>
+    <div class="attr-info">
+      <div class="attr-name">ニモ＆フレンズ・シーライダー</div>
+      <div class="attr-area">📍 ポートディスカバリー｜潜水艇ライド</div>
+      <span class="tag tag-free">20〜40分</span>
+      <div class="attr-tip">💡 サイズが変わる体験。小さなお子さまにも優しい</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">4</div>
+    <div class="attr-info">
+      <div class="attr-name">アクアトピア</div>
+      <div class="attr-area">📍 ポートディスカバリー｜水上ライド</div>
+      <span class="tag tag-free">20〜40分</span>
+      <div class="attr-tip">💡 水しぶきあり。夏場は人気急上昇。予備の着替え推奨！</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">5</div>
+    <div class="attr-info">
+      <div class="attr-name">S.S.コロンビア号デッキ＆バレルズ</div>
+      <div class="attr-area">📍 アメリカンウォーターフロント｜探索施設</div>
+      <span class="tag tag-free">常時入場可</span>
+      <div class="attr-tip">💡 豪華客船の内部を探索。待ちなし&眺め抜群。休憩に最適</div>
+    </div>
+  </div>
+
+  <div class="attr-row">
+    <div class="attr-rank">6</div>
+    <div class="attr-info">
+      <div class="attr-name">エレクトリックレールウェイ</div>
+      <div class="attr-area">📍 アメリカンWF〜ポートディスカバリー｜移動用電車</div>
+      <span class="tag tag-free">乗車自由</span>
+      <div class="attr-tip">💡 ハーバーを眺めながら移動できる。疲れたら乗るだけでも◎</div>
+    </div>
+  </div>
+
+  <!-- 攻略コツまとめ -->
+  <div class="card green mt12">
+    <div class="card-title"><span class="emoji">🏆</span>並び攻略 黄金ルール</div>
+    <ul class="tip-list">
+      <li><strong>開園15分前</strong>にゲート前で待機。入園即DPA購入が最優先</li>
+      <li>人気TOP3（アナエルサ・ソアリン・タワー）は<strong>DPA必須</strong></li>
+      <li>12〜15時は最混雑。この時間は食事・ショップ・ショーで回避</li>
+      <li>閉園1〜2時間前は列が緩和。逃すな！</li>
+      <li>雨天日は屋外アトラクション運休あり。マジックランプ・ニモ等の屋内系に集中</li>
+      <li>モバイルオーダー（アプリ）で食事の受取時間を予約すると大幅節約</li>
+      <li>ハッピーエントリー（ディズニーホテル宿泊）：15分早入園で先手必勝</li>
+    </ul>
+  </div>
+
+</div><!-- /#tab-ride -->
+
+
+<!-- =========================================================
+     TAB 2: グルメ
+========================================================= -->
+<div id="tab-gourmet" class="tab-panel">
+
+  <div class="info-box">
+    <strong>📱 モバイルオーダー必須！</strong>　人気レストランはアプリで受取時間を事前予約。当日の混雑ピーク（12〜15時）を避けられる。<br>
+    <strong>🏆 2026年6月：フード＆ワインフェスティバル最終日！</strong>　本日（6/29）は最後のチャンス。
+  </div>
+
+  <!-- 高級レストラン -->
+  <p class="section-head">🥂 高級・要予約レストラン</p>
+
+  <div class="card gold">
+    <div class="card-title"><span class="emoji">🏰</span>アレンデール・ロイヤルバンケット</div>
+    <div class="sub">📍 ファンタジースプリングス（アナ雪エリア）</div>
+    <span class="tag tag-new">FSホテル宿泊者優先</span>
+    <div class="mt8">🍽️ アレンデール城の中で食事できる世界唯一の体験<br>
+    💰 ランチ：¥2,500〜3,500程度　ディナー：¥3,500〜5,000程度<br>
+    ⭐ <span class="stars">★★★★★</span>（人気度：最高）<br>
+    📅 予約必須。公式アプリ or ウェブで1ヵ月前9:00から</div>
+    <div class="attr-tip">🏆 「パイ包み焼き」が絶品と口コミ多数。雰囲気含め最上級体験</div>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="emoji">🚢</span>マゼランズ</div>
+    <div class="sub">📍 メディテレーニアンハーバー（S.S.コロンビア号内）</div>
+    <div class="mt8">🍽️ コースフレンチ・欧州料理<br>
+    💰 ランチコース：¥5,000〜8,000　ディナー：¥8,000〜12,000<br>
+    ⭐ <span class="stars">★★★★☆</span>（人気度：高）<br>
+    📅 要予約。公式サイトで1ヵ月前から</div>
+    <div class="attr-tip">🎉 ※S.S.コロンビア号は4/15〜6/30はジュビリーガラ（貸切）。本日（6/29）は特別営業の可能性あり、当日公式確認を</div>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="emoji">🍕</span>リストランテ・ディ・カナレット</div>
+    <div class="sub">📍 メディテレーニアンハーバー</div>
+    <div class="mt8">🍽️ 本格イタリアンコース（ヴェネツィアの街並みビュー）<br>
+    💰 ランチ：¥4,500〜6,000程度<br>
+    ⭐ <span class="stars">★★★★☆</span>（人気度：高）<br>
+    📅 要予約。石窯ピッツァが絶品</div>
+  </div>
+
+  <!-- カジュアル・テーブルサービス -->
+  <p class="section-head">🍽️ テーブルサービス（座って食べる）</p>
+
+  <table class="tbl">
+    <tr><th>レストラン名</th><th>エリア</th><th>ジャンル</th><th>価格帯</th><th>人気度</th></tr>
+    <tr>
+      <td class="bold">ケープコッド・クックオフ</td>
+      <td>AWF</td><td>アメリカン・ハンバーガー<br><span class="sub">ダッフィーショー鑑賞可</span></td>
+      <td>¥1,500〜2,500</td>
+      <td><span class="stars">★★★★★</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ホライズンベイ・レストラン</td>
+      <td>PD</td><td>グリル料理・洋食</td>
+      <td>¥1,800〜2,800</td>
+      <td><span class="stars">★★★★☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ヴォルケイニア・レストラン</td>
+      <td>MI</td><td>中華（チャーハン・マーボー豆腐）<br><span class="sub">ソファ席でゆったり休憩にも◎</span></td>
+      <td>¥1,500〜2,500</td>
+      <td><span class="stars">★★★★☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">レストラン櫻</td>
+      <td>AWF</td><td>和食（ちらし寿司・天ぷら・定食）</td>
+      <td>¥1,800〜2,800</td>
+      <td><span class="stars">★★★☆☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">カスバ・フードコート</td>
+      <td>AC</td><td>インドカレー（本格スパイス）<br><span class="sub">ナン付き。宮殿エリアと民家エリアで雰囲気が異なる</span></td>
+      <td>¥1,200〜2,000</td>
+      <td><span class="stars">★★★★☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ユカタン・ベースキャンプ・グリル</td>
+      <td>RRD</td><td>グリル・ライスボウル<br><span class="sub">ハッシュドビーフのユカタンライスボウルが人気</span></td>
+      <td>¥1,500〜2,500</td>
+      <td><span class="stars">★★★★☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ザンビーニ・ブラザーズ・リストランテ</td>
+      <td>MH</td><td>イタリアン（ピッツァ・パスタ・ドリア）<br><span class="sub">ワイナリー改造のカジュアルイタリアン</span></td>
+      <td>¥1,500〜2,500</td>
+      <td><span class="stars">★★★★☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ドックサイドダイナー</td>
+      <td>AWF</td><td>カジュアル（サンドイッチ・チキンワッフル）</td>
+      <td>¥1,200〜2,000</td>
+      <td><span class="stars">★★★☆☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">リバティ・ランディング・ダイナー</td>
+      <td>AWF</td><td>アメリカン・カジュアル</td>
+      <td>¥1,200〜2,000</td>
+      <td><span class="stars">★★★☆☆</span></td>
+    </tr>
+    <tr>
+      <td class="bold">ニューヨーク・デリ</td>
+      <td>AWF</td><td>デリ・サンドウィッチ</td>
+      <td>¥1,200〜2,000</td>
+      <td><span class="stars">★★★☆☆</span></td>
+    </tr>
+  </table>
+
+  <!-- バー・カフェ -->
+  <p class="section-head">🍻 バー・カフェ・軽食</p>
+
+  <table class="tbl">
+    <tr><th>店舗名</th><th>エリア</th><th>メニュー</th><th>価格帯</th></tr>
+    <tr>
+      <td class="bold">カフェ・ポルトフィーノ</td>
+      <td>MH</td><td>カフェ・デザート・軽食</td><td>¥600〜1,500</td>
+    </tr>
+    <tr>
+      <td class="bold">マンマ・ビスコッティーズ・ベーカリー</td>
+      <td>MH</td><td>パン・スウィーツ（25周年マカロン販売）</td><td>¥500〜1,200</td>
+    </tr>
+    <tr>
+      <td class="bold">セバスチャンのカリプソキッチン</td>
+      <td>MRL</td><td>揚げ小エビ・スナック<br><span class="sub">「カリプソチキン」が名物</span></td><td>¥600〜1,500</td>
+    </tr>
+    <tr>
+      <td class="bold">ハドソンリバー・ハーベスト</td>
+      <td>AWF</td><td>軽食・スナック</td><td>¥500〜1,200</td>
+    </tr>
+    <tr>
+      <td class="bold">ハイタイド・トリート</td>
+      <td>AWF</td><td>デザート・スウィーツ</td><td>¥500〜1,000</td>
+    </tr>
+    <tr>
+      <td class="bold">コロンビア号デッキバー</td>
+      <td>AWF</td><td>バー（アルコール・ソフト）</td><td>¥700〜1,800</td>
+    </tr>
+    <tr>
+      <td class="bold">ダッフィーのサニーファン</td>
+      <td>AWF</td><td>ソフトドリンク・スナック</td><td>¥400〜900</td>
+    </tr>
+    <tr>
+      <td class="bold">コーヴ・バー</td>
+      <td>MI</td><td>火口湖テラス。カクテル・テリーレッグ・ギョウザ<br><span class="sub">隠れ家感ある穴場。絶景テラス</span></td><td>¥600〜1,500</td>
+    </tr>
+    <tr>
+      <td class="bold">ルックアウト・クックアウト</td>
+      <td>RRD</td><td>スパイシースモークチキンレッグ</td><td>¥600〜900</td>
+    </tr>
+  </table>
+
+  <!-- フードワゴン -->
+  <p class="section-head">🌭 フードワゴン・食べ歩き人気TOP</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🦐</span>2026年6月 食べ歩き注目メニュー</div>
+    <ul class="tip-list">
+      <li>🦐 <strong>うきわまん（エビ）</strong>｜ドナルドデザインの定番。¥750</li>
+      <li>🐔 <strong>ブラックペッパーてりやきチキンロール</strong>｜レストラン櫻テラス。食べ応え◎</li>
+      <li>🍪 <strong>25周年ミッキーマカロン</strong>｜ホワイトチョコ&スミレ香。¥650（期間限定〜2027/3）</li>
+      <li>🥭 <strong>スペシャルラッシー（マンゴー＆ブルーゼリー）</strong>｜25周年限定。¥750</li>
+      <li>🌟 <strong>スパークリングラッシー</strong>｜シルバーラメきらめくドリンク。映え◎</li>
+      <li>🍿 <strong>ホタテガーリックバター味ポップコーン</strong>｜2026年4月復刻！シー限定</li>
+    </ul>
+  </div>
+
+  <div class="warn-box">
+    <strong>📅 本日6/29限定チャンス！</strong><br>
+    「東京ディズニーシー・フード＆ワイン・フェスティバル」は本日（6/30まで）で最終日。テーマポート毎に食の旅を楽しむスペシャルイベントメニューは今日が最後！逃さずに！
+  </div>
+
+  <!-- エリア略語説明 -->
+  <div class="sub mt8">
+    エリア略語：MH=メディテレーニアンハーバー、AWF=アメリカンウォーターフロント、PD=ポートディスカバリー、AC=アラビアンコースト、RRD=ロストリバーデルタ、MI=ミステリアスアイランド、MRL=マーメイドラグーン、FS=ファンタジースプリングス
+  </div>
+
+</div><!-- /#tab-gourmet -->
+
+
+<!-- =========================================================
+     TAB 3: ポップコーン
+========================================================= -->
+<div id="tab-popcorn" class="tab-panel">
+
+  <div class="info-box">
+    <strong>🍿 ディズニーシー 2026年6月 ポップコーン情報</strong><br>
+    全11ヶ所のワゴンで販売中。シーならではのシーフード系フレーバーが特徴！<br>
+    レギュラーボックス：<span class="price-chip">¥400〜500</span>　リフィル：<span class="price-chip">¥600〜800</span>
+  </div>
+
+  <div class="warn-box">
+    <strong>🆕 最新情報 2026/4/10〜：「ホタテガーリックバター味」復刻中！</strong>
+  </div>
+
+  <!-- フレーバー一覧 -->
+  <p class="section-head">🎯 フレーバー全種 完全ガイド</p>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🦐</div>
+    <div class="pc-info">
+      <div class="pc-name">ガーリックシュリンプ味 <span class="pop-star">★★★★★</span></div>
+      <div class="pc-spot">📍 リドアイル前｜シー限定</div>
+      <div class="pc-spot">シーフード系の王様。海老の旨みとガーリックが絶妙</div>
+    </div>
+    <div class="pc-price">¥400<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🏴‍☠️</div>
+    <div class="pc-info">
+      <div class="pc-name">ホタテガーリックバター味 <span class="pop-star">★★★★★</span></div>
+      <div class="pc-spot">📍 リドアイル前（期間限定復刻中！2026/4/10〜）｜シー限定</div>
+      <div class="pc-spot">贅沢なホタテとバターの香ばしさ。やみつき注意</div>
+    </div>
+    <div class="pc-price">¥400<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🧄</div>
+    <div class="pc-info">
+      <div class="pc-name">ブラックペッパー味 <span class="pop-star">★★★★☆</span></div>
+      <div class="pc-spot">📍 ソアリン：ファンタスティック・フライト前</div>
+      <div class="pc-spot">ピリッとした胡椒がクセになる。大人向け</div>
+    </div>
+    <div class="pc-price">¥500<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🧈</div>
+    <div class="pc-info">
+      <div class="pc-name">しょうゆバター味 <span class="pop-star">★★★★☆</span></div>
+      <div class="pc-spot">📍 アクアトピア横</div>
+      <div class="pc-spot">醤油の香ばしさとバターのコク。鉄板の美味しさ</div>
+    </div>
+    <div class="pc-price">¥500<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🍬</div>
+    <div class="pc-info">
+      <div class="pc-name">キャラメル味 <span class="pop-star">★★★★☆</span></div>
+      <div class="pc-spot">📍 ドックサイドステージ前・コーヴ・オブ・ワンダー横</div>
+      <div class="pc-spot">甘さ控えめ上品なキャラメル。老若男女に人気</div>
+    </div>
+    <div class="pc-price">¥500<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🍫</div>
+    <div class="pc-info">
+      <div class="pc-name">ミルクチョコレート味 <span class="pop-star">★★★☆☆</span></div>
+      <div class="pc-spot">📍 ケープコッド・クックオフ前</div>
+      <div class="pc-spot">スウィーツ感覚。デザートポップコーン</div>
+    </div>
+    <div class="pc-price">¥500<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🌶️</div>
+    <div class="pc-info">
+      <div class="pc-name">カレー味 <span class="pop-star">★★★☆☆</span></div>
+      <div class="pc-spot">📍 アラビアンコースト前</div>
+      <div class="pc-spot">エキゾチックなスパイス。辛め好きに◎</div>
+    </div>
+    <div class="pc-price">¥500<br><span class="sub">BOX</span></div>
+  </div>
+
+  <div class="pc-card">
+    <div class="pc-emoji">🧂</div>
+    <div class="pc-info">
+      <div class="pc-name">ソルト（塩）味 <span class="pop-star">★★★☆☆</span></div>
+      <div class="pc-spot">📍 ハンガーステージ横</div>
+      <div class="pc-spot">シンプルが一番。クセなく食べやすい。子どもも◎</div>
+    </div>
+    <div class="pc-price">¥400<br><span class="sub">BOX</span></div>
+  </div>
+
+  <!-- バケット -->
+  <p class="section-head">🎪 ポップコーンバケット情報</p>
+
+  <div class="card gold">
+    <div class="card-title"><span class="emoji">🎉</span>25周年スパークリング・ジュビリーバケット</div>
+    <div class="sub">販売期間：2026/4/10〜2027/3/31</div>
+    <div class="mt8">
+      💰 価格：<strong>¥3,500</strong><br>
+      📍 場所：ドックサイドステージ前（キャラメル）・コーヴ・オブ・ワンダー横（キャラメル）・アクアトピア横（しょうゆバター）・ハンガーステージ横（ソルト）・ソアリン前（ブラックペッパー）・リドアイル前（ガーリックシュリンプ）<br>
+      ⭐ ジュビリーブルーのきらめきデザイン。今年だけ！
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🐿️</span>チップ＆デールバケット</div>
+    <div class="sub">販売期間：2025/9/18〜</div>
+    <div class="mt8">💰 価格：<strong>¥3,600</strong><br>チップ＆デールがピーナッツをドナルドに変身させているデザイン。可愛さ抜群</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🐻</span>ダッフィー＆フレンズバケット各種</div>
+    <div class="mt8">💰 価格：<strong>¥3,200〜3,600</strong><br>📍 シーでしか手に入らない限定デザイン多数。見かけたら即ゲット！</div>
+  </div>
+
+  <!-- 11ヶ所MAP -->
+  <p class="section-head">🗺️ ワゴン全11ヶ所 場所ガイド</p>
+  <div class="card">
+    <div class="card-title"><span class="emoji">📍</span>ワゴン場所一覧</div>
+    <table class="tbl">
+      <tr><th>#</th><th>場所</th><th>フレーバー</th></tr>
+      <tr><td>①</td><td>リドアイル前</td><td>ガーリックシュリンプ／ホタテガーリックバター</td></tr>
+      <tr><td>②</td><td>ドックサイドステージ前</td><td>キャラメル</td></tr>
+      <tr><td>③</td><td>リバティ・ランディング・ダイナー前</td><td>ミルクチョコ</td></tr>
+      <tr><td>④</td><td>ケープコッド・クックオフ前</td><td>ミルクチョコ</td></tr>
+      <tr><td>⑤</td><td>アクアトピア横</td><td>しょうゆバター</td></tr>
+      <tr><td>⑥</td><td>ハンガーステージ横</td><td>ソルト</td></tr>
+      <tr><td>⑦</td><td>スカットルのスクーター前</td><td>キャラメル</td></tr>
+      <tr><td>⑧</td><td>アラビアンコースト前</td><td>カレー</td></tr>
+      <tr><td>⑨</td><td>ソアリン前</td><td>ブラックペッパー</td></tr>
+      <tr><td>⑩</td><td>コーヴ・オブ・ワンダー横</td><td>キャラメル</td></tr>
+      <tr><td>⑪</td><td>フェアリー・ティンカーベルのビジーバギー前</td><td>ローストビーフ（FS限定）</td></tr>
+    </table>
+    <div class="sub mt8">※ローストビーフ味はFS内・ピーターパンエリアのカラフルな船ワゴン</div>
+  </div>
+
+  <div class="info-box">
+    <strong>💡 リフィル活用術</strong><br>
+    バケットを持参するとリフィル（¥600〜800）で補充可能。同じワゴンでなくてもOKな場合あり（購入時に確認を）。
+  </div>
+
+</div><!-- /#tab-popcorn -->
+
+
+<!-- =========================================================
+     TAB 4: お土産
+========================================================= -->
+<div id="tab-souvenir" class="tab-panel">
+
+  <div class="warn-box">
+    <strong>🎉 2026年6月 シーは25周年！</strong><br>
+    テーマカラー「ジュビリーブルー」の限定グッズが多数。2027年3月31日まで販売の期間限定品は特に注目。売り切れ注意！
+  </div>
+
+  <!-- 25周年人気グッズ -->
+  <p class="section-head">🌟 25周年 スパークリング・ジュビリー 限定グッズ</p>
+
+  <div class="souv-card">
+    <div class="souv-name">🔵 ジュビリーバッジ（カスタマイズ型）</div>
+    <div class="souv-price">¥各パーツ価格（バッジ・リボン・チャーム・ストラップ組み合わせ）</div>
+    <div class="souv-desc">自分だけのオリジナルバッジが作れる。組み合わせ無限。お子さまから大人まで人気</div>
+    <div class="souv-voice">「パーツを変えて毎回違うコーデ！リピ確定」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">🎀 ジュビリーブルー カチューシャ</div>
+    <div class="souv-price">¥2,400</div>
+    <div class="souv-desc">キラキラ輝くジュビリーブルーのリボンカチューシャ。光るおもちゃ（¥2,000）と組み合わせると夜映え◎</div>
+    <div class="souv-voice">「25周年の写真には絶対つけたい！」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">🎪 25周年カプセルトイ（ガチャ）</div>
+    <div class="souv-price">¥500</div>
+    <div class="souv-desc">5周年〜20周年の過去アートがデザインされたショッピングバッグ風小物入れ。中身はお楽しみ</div>
+    <div class="souv-voice">「どれが入るか開けるまでのドキドキが楽しい！」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">🧸 ジュビリーブルー ミッキー＆ミニー ぬいぐるみチャーム</div>
+    <div class="souv-price">¥2,500〜3,000程度</div>
+    <div class="souv-desc">8つのテーマポートの衣装を着たミッキー＆ミニー。コレクター必見</div>
+    <div class="souv-voice">「全種揃えたくなる可愛さ…」</div>
+  </div>
+
+  <!-- FS人気グッズ -->
+  <p class="section-head">🏰 ファンタジースプリングス グッズ</p>
+
+  <div class="souv-card">
+    <div class="souv-name">❄️ アナ＆エルサ チョコレートクランチ缶</div>
+    <div class="souv-price">¥2,300</div>
+    <div class="souv-desc">フローズンキングダム・FS缶に各キャラが描かれた缶入りクランチ。ミルク12個＋ストロベリー12個</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">🦋 ラプンツェル アソーテッドクッキー缶</div>
+    <div class="souv-price">¥1,800〜2,500</div>
+    <div class="souv-desc">FS世界観をそのまま缶に。チョコサンドクッキー＋3種ロールクッキー。お土産の定番</div>
+    <div class="souv-voice">「缶もかわいくて捨てられない」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">🧊 ジュビリーロケット（カスタマイズグッズ）</div>
+    <div class="souv-price">¥各パーツ価格</div>
+    <div class="souv-desc">スパークリングピースを選んで組み合わせる自分だけのディズニーシー25周年グッズ</div>
+  </div>
+
+  <!-- ダッフィー -->
+  <p class="section-head">🐻 ダッフィー＆フレンズ（シー限定）</p>
+
+  <div class="souv-card">
+    <div class="souv-name">ファインド・ユア・ビューティフル・ブルー！シリーズ</div>
+    <div class="souv-price">¥1,500〜4,000</div>
+    <div class="souv-desc">青色さがしをテーマにしたパステルブルーのコスチュームダッフィー&フレンズ。ぬいぐるみバッジ・ポーチ・タオルなど多数</div>
+    <div class="souv-voice">「ぬいぐるみバッジは服にもバッグにも付けられて毎日使える！」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">ダッフィー マシュマロ（チョコクリーム入り）</div>
+    <div class="souv-price">¥600</div>
+    <div class="souv-desc">シーらしい定番お菓子土産。バラまき用に◎。フワモチ食感</div>
+    <div class="souv-voice">「職場へのバラまきはコレが鉄板！」</div>
+  </div>
+
+  <!-- 人気菓子系 -->
+  <p class="section-head">🍪 お菓子・食べ物系 人気お土産</p>
+
+  <div class="souv-card">
+    <div class="souv-name">25周年マシュマロ（ミッキー＆フレンズデザイン）</div>
+    <div class="souv-price">¥800</div>
+    <div class="souv-desc">個包装でばらまきに最適。2種フレーバー（チョコクリーム・ラムネ風味）</div>
+    <div class="souv-voice">「甘さのバランスが絶妙で誰でも喜ぶ」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">カスバ・フードコートのレトルトカレー（ジーニー缶）</div>
+    <div class="souv-price">¥900</div>
+    <div class="souv-desc">チキン（甘口）＋ビーフ（中辛）。スパイスが本格的。ユニークなお土産として人気</div>
+    <div class="souv-voice">「思ったより本格的！辛さがちょうどよかった」</div>
+  </div>
+
+  <div class="souv-card">
+    <div class="souv-name">チャイシュガー味チュロスパッケージ（25周年）</div>
+    <div class="souv-price">¥1,100</div>
+    <div class="souv-desc">個装で職場配布向き。25周年特別パッケージ</div>
+  </div>
+
+  <!-- 購入のコツ -->
+  <div class="card green mt12">
+    <div class="card-title"><span class="emoji">💡</span>お土産 購入のコツ</div>
+    <ul class="tip-list">
+      <li>人気グッズは朝イチ or 閉園前の購入が在庫あり</li>
+      <li>公式アプリ（TDRアプリ）でグッズ在庫を確認できる</li>
+      <li>重い荷物は「宅配サービス」（有料）で自宅に送れる</li>
+      <li>「ファンタジースプリングス・ギフト」「エンポーリオ」がFS関連グッズの主要ショップ</li>
+      <li>季節限定品は終了日が早まることがある。迷ったら即買いが正解</li>
+    </ul>
+  </div>
+
+</div><!-- /#tab-souvenir -->
+
+
+<!-- =========================================================
+     TAB 5: ショー
+========================================================= -->
+<div id="tab-show" class="tab-panel">
+
+  <div class="danger-box">
+    <strong>⚠️ 2026/6/29 重要情報</strong><br>
+    「スカイ・フル・オブ・カラーズ」は<strong>6/15〜9/14 休止中</strong>。代わりに25周年ショーが充実！<br>
+    翌月スケジュールは前月8日ごろ公式公開。
+  </div>
+
+  <!-- ナイトショー -->
+  <p class="section-head">🌙 ナイトショー（最重要）</p>
+
+  <div class="show-card">
+    <div class="show-name">🎆 ビリーヴ！〜シー・オブ・ドリームス〜</div>
+    <div class="show-meta">📍 メディテレーニアンハーバー｜公演時間 約20分｜無料鑑賞</div>
+    <div class="show-desc">花火×プロジェクションマッピング×船×音楽の総合ナイトショー。シーを代表する圧巻の夜の体験</div>
+    <div class="show-tip">
+      🪑 <strong>鑑賞エリア確保のコツ</strong>：開始1.5〜2時間前にハーバー周辺の良ポジションを確保。開始30分前にはほぼ埋まる。中央ステージ前が迫力◎。ミラコスタ側は全体が見渡せる。<br>
+      💰 料金：無料（DPAプレミア席は有料。アプリで確認）
+    </div>
+  </div>
+
+  <!-- 25周年ショー -->
+  <p class="section-head">🎉 25周年スパークリング・ジュビリー ショー</p>
+
+  <div class="show-card">
+    <div class="show-name">✨ スパークリング・ジュビリー・セレブレーション</div>
+    <div class="show-meta">📍 メディテレーニアンハーバー｜公演時間 約15分｜2026/4/15〜2027/3/31</div>
+    <div class="show-desc">ジュビリーブルーの衣装のミッキーたちが船に乗って登場。陸上でも多数のキャラ＆キャスト。セレブレーションダンスを一緒に踊って25周年を祝う！</div>
+    <div class="show-tip">
+      ⏰ 公演回数：1日2〜3回（公式スケジュール要確認）<br>
+      🆓 無料。ハーバー周辺で鑑賞
+    </div>
+  </div>
+
+  <div class="show-card">
+    <div class="show-name">🌃 スパークリング・ジュビリー・ナイト（環境演出）</div>
+    <div class="show-meta">📍 メディテレーニアンハーバー（ホテルミラコスタ壁面）｜約5分｜2026/4/15〜2027/3/31</div>
+    <div class="show-desc">ミラコスタの壁面にきらめく映像が映し出される夜の環境演出。25周年のテーマソングとともに幻想的な空間が広がる</div>
+    <div class="show-tip">
+      ⏰ ビリーヴ！終了後など数回実施<br>
+      🆓 無料。散策しながら自然に楽しめる
+    </div>
+  </div>
+
+  <div class="show-card">
+    <div class="show-name">💃 ダンス・ザ・グローブ！（25周年バージョン）</div>
+    <div class="show-meta">📍 ウォーターフロントパーク｜2026年内</div>
+    <div class="show-desc">世界の音楽とダンスで盛り上がるステージショー。25周年バージョンで豪華キャラが参加</div>
+    <div class="show-tip">
+      🆓 無料鑑賞<br>
+      📱 当日のスケジュールは公式アプリで確認
+    </div>
+  </div>
+
+  <!-- 定番ショー -->
+  <p class="section-head">🎪 定番ショー</p>
+
+  <div class="show-card">
+    <div class="show-name">🐻 ダッフィー＆フレンズのワンダフル・フレンドシップ</div>
+    <div class="show-meta">📍 ショーレストラン「ハンガーステージ」｜要予約・有料</div>
+    <div class="show-desc">食事をしながらダッフィー&フレンズのショーを鑑賞。感動のフレンドシップストーリー</div>
+    <div class="show-tip">
+      💰 料金：食事込み（ランチ¥3,500〜 / ディナー¥4,000〜程度）<br>
+      📅 予約方法：公式ウェブ or アプリ。利用1ヵ月前9:00〜前日20:59まで。当日9:00〜も空き次第可<br>
+      💡 コツ：1ヵ月前の9時ちょうどにアクセスが集中。前日夜にキャンセル空きが出ることも
+    </div>
+  </div>
+
+  <div class="show-card">
+    <div class="show-name">🎭 マジックランプシアター</div>
+    <div class="show-meta">📍 アラビアンコースト｜約20分｜無料・整理券不要</div>
+    <div class="show-desc">ジーニーが繰り広げる3D映像＋特殊効果ショー。天気に左右されない屋内施設</div>
+    <div class="show-tip">
+      🆓 無料。次回公演開始に合わせて並ぶ<br>
+      💡 雨の日・混雑時の時間調整に最適。おすすめ
+    </div>
+  </div>
+
+  <div class="show-card">
+    <div class="show-name">🌈 スカイ・フル・オブ・カラーズ</div>
+    <div class="show-meta">📍 メディテレーニアンハーバー｜⚠️ 2026/6/15〜9/14 休止中</div>
+    <div class="show-desc">カラフルな花火と水上ショー。9月再開予定</div>
+    <div class="show-tip">
+      ⚠️ 本日（6/29）は休止中のため鑑賞不可
+    </div>
+  </div>
+
+  <div class="show-card">
+    <div class="show-name">🦅 ドリームス・テイク・フライト</div>
+    <div class="show-meta">📍 ウォーターフロントパーク周辺</div>
+    <div class="show-desc">ディズニーキャラとともに夢を旅する演出ショー</div>
+    <div class="show-tip">
+      📱 当日のスケジュールは公式アプリ「東京ディズニーリゾート・アプリ」で確認
+    </div>
+  </div>
+
+  <!-- ショー予約まとめ -->
+  <div class="card green mt12">
+    <div class="card-title"><span class="emoji">📋</span>ショー鑑賞 予約・攻略まとめ</div>
+    <table class="tbl">
+      <tr><th>ショー</th><th>鑑賞方法</th><th>予約タイミング</th></tr>
+      <tr><td>ビリーヴ！</td><td>無料・自由鑑賞</td><td>良席は1〜2時間前に場所確保</td></tr>
+      <tr><td>ジュビリー・セレブレーション</td><td>無料・自由鑑賞</td><td>30分前から混み始める</td></tr>
+      <tr><td>ダッフィー・フレンドシップ</td><td>有料・要事前予約</td><td>1ヵ月前9時から公式サイト</td></tr>
+      <tr><td>マジックランプ</td><td>無料・整理券不要</td><td>公演開始15〜20分前に並ぶ</td></tr>
+      <tr><td>ダンス・ザ・グローブ</td><td>無料・自由鑑賞</td><td>15〜20分前に場所確保</td></tr>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <strong>📱 スケジュール確認は必ず公式アプリで！</strong><br>
+    東京ディズニーリゾート・アプリ（無料）でリアルタイムのショー時間を確認。天候による中止情報も即時反映。
+  </div>
+
+</div><!-- /#tab-show -->
+
+
+<!-- =========================================================
+     TAB 6: お困りごと
+========================================================= -->
+<div id="tab-help" class="tab-panel">
+
+  <div class="danger-box">
+    <strong>🚨 緊急時はまず近くのキャストに声をかけてください！</strong><br>
+    キャストは緊急対応の訓練を受けています。どんな状況でも日本語で気軽に声かけを。
+  </div>
+
+  <!-- 救急 -->
+  <p class="section-head">🏥 救急・医療</p>
+
+  <div class="emg-card">
+    <div class="emg-icon">🏥</div>
+    <div>
+      <div class="emg-title">中央救護室</div>
+      <div class="emg-desc">ナースキャスト（看護師資格保持）が常駐。体調不良・けがの応急処置が受けられます。常用薬は必ず持参を</div>
+      <div class="emg-loc">📍 場所：エントランスから入ってホテルミラコスタの下を通過後、右手に進んだメディテレーニアンハーバー内（カフェ・ポルトフィーノ近く）</div>
+    </div>
+  </div>
+
+  <div class="emg-card">
+    <div class="emg-icon">❤️</div>
+    <div>
+      <div class="emg-title">AED（自動体外式除細動器）</div>
+      <div class="emg-desc">パーク各所に設置。電源を入れると音声でガイドされます。心停止時は即キャストに声かけ＋119番</div>
+      <div class="emg-loc">📍 救護室内にも設置。緊急時は最寄りキャストに手配を依頼</div>
+    </div>
+  </div>
+
+  <div class="emg-card">
+    <div class="emg-icon">🚒</div>
+    <div>
+      <div class="emg-title">重篤な緊急時（119番）</div>
+      <div class="emg-desc">生命の危機を感じる場合は迷わず119番に通報。パーク内からも通話可能</div>
+      <a href="tel:119" class="tel-btn">📞 119番に電話</a>
+    </div>
+  </div>
+
+  <!-- 迷子 -->
+  <p class="section-head">👶 迷子・はぐれた</p>
+
+  <div class="emg-card">
+    <div class="emg-icon">🔍</div>
+    <div>
+      <div class="emg-title">迷子センター（ゲストリレーション）</div>
+      <div class="emg-desc">小学6年生以下のお子さま対象。パーク内外の施設と連絡を取り、お連れの方と引き合わせ。<br>
+      ⚠️ ベビーセンターは2026/5/12〜10/2 休止中のため、迷子は「ゲストリレーション」で対応</div>
+      <div class="emg-loc">📍 場所：ゲストリレーション（エントランス付近）<br>
+      💡 中学生以上とはぐれた場合は「パーク・インフォメーション」の伝言サービスを利用</div>
+    </div>
+  </div>
+
+  <!-- 忘れ物 -->
+  <p class="section-head">📦 忘れ物・落とし物</p>
+
+  <div class="emg-card">
+    <div class="emg-icon">🔎</div>
+    <div>
+      <div class="emg-title">遺失物の受付</div>
+      <div class="emg-desc">落とし物・忘れ物はゲストリレーションまたはパーク・インフォメーションへ。当日はキャストに声かけが最速</div>
+      <div class="emg-loc">📍 ゲートを出た後：東京ディズニーリゾートのお問い合わせセンターへ</div>
+    </div>
+  </div>
+
+  <!-- ロッカー -->
+  <p class="section-head">🗄️ コインロッカー</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🗄️</span>コインロッカーの場所</div>
+    <ul class="tip-list">
+      <li>パーク<strong>エントランス付近</strong>（最大量・各サイズあり）</li>
+      <li>パーク<strong>内部</strong>の複数箇所（小サイズ中心）</li>
+      <li>ファンタジースプリングス・エントランス付近</li>
+    </ul>
+    <div class="attr-tip">💡 モバイルバッテリーはファンタジースプリングス内にはレンタルなし。他エリアで借りること</div>
+  </div>
+
+  <!-- ベビー関連 -->
+  <p class="section-head">👶 赤ちゃん・子ども向けサービス</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🍼</span>ベビーセンター（休止中）</div>
+    <div>授乳・おむつ替え施設。<strong>⚠️ 2026/5/12〜10/2は休止中</strong><br>
+    休止中は施設スタッフにご相談ください。多目的トイレ（オストメイト仕様）は利用可能</div>
+  </div>
+
+  <!-- バリアフリー -->
+  <p class="section-head">♿ バリアフリー・サポート</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">♿</span>車いすレンタル・バリアフリー</div>
+    <ul class="tip-list">
+      <li>車いす・電動車いすレンタル：パークエントランス＆FSエントランス</li>
+      <li>一部ショーにバリアフリー鑑賞スペースあり</li>
+      <li>アシスタンスドッグ（補助犬）はほぼ全アトラクション利用可</li>
+    </ul>
+  </div>
+
+  <!-- 便利サービス -->
+  <p class="section-head">📱 便利なパークサービス</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">📱</span>パーク内サービス一覧</div>
+    <table class="tbl">
+      <tr><th>サービス</th><th>場所・詳細</th></tr>
+      <tr><td><strong>モバイルバッテリーレンタル</strong></td><td>パーク各所（FSエリア内は不可）。要アプリ</td></tr>
+      <tr><td><strong>ディズニー・モバイルオーダー</strong></td><td>公式アプリで食事の受取時間を予約</td></tr>
+      <tr><td><strong>荷物宅配サービス</strong></td><td>パーク内で購入した荷物を自宅へ配送（有料）</td></tr>
+      <tr><td><strong>ディズニー・フォトサービス</strong></td><td>フォトグラファー撮影写真をアプリで取込・購入</td></tr>
+      <tr><td><strong>ゲストリレーション</strong></td><td>総合案内・困りごと全般</td></tr>
+      <tr><td><strong>パーク・インフォメーション</strong></td><td>当日のスケジュール・地図配布</td></tr>
+    </table>
+  </div>
+
+  <!-- トイレ情報 -->
+  <p class="section-head">🚻 トイレ情報</p>
+
+  <div class="card">
+    <div class="card-title"><span class="emoji">🚻</span>トイレの場所</div>
+    <ul class="tip-list">
+      <li>各テーマポートに最低1〜2ヶ所設置</li>
+      <li>多目的トイレ（車いす・オストメイト対応）あり</li>
+      <li>FSエリア内：FS・エントリーウェイ入って左手奥＆フローズンキングダム内の2ヶ所</li>
+      <li>混雑時のピークは11〜14時。この時間を避けると空きやすい</li>
+    </ul>
+    <div class="attr-tip">💡 公式アプリのパークマップでトイレ位置を確認できます</div>
+  </div>
+
+  <!-- 問い合わせ -->
+  <p class="section-head">📞 お問い合わせ先</p>
+
+  <div class="card red">
+    <div class="card-title"><span class="emoji">📞</span>東京ディズニーリゾート 公式</div>
+    <div class="mt8">
+      <strong>お客様サポート</strong>：0570-00-8632<br>
+      <span class="sub">（平日 9:00〜17:00）</span><br>
+      <strong>公式サイト：</strong>tokyodisneyresort.jp<br>
+      <strong>公式アプリ：</strong>東京ディズニーリゾート・アプリ（無料）
+    </div>
+    <a href="tel:0570008632" class="tel-btn" style="background:#1565c0">📞 サポートに電話</a>
+  </div>
+
+</div><!-- /#tab-help -->
+
+
+<!-- =========================================================
+     TAB 7: 便利リンク
+========================================================= -->
+<div id="tab-links" class="tab-panel">
+
+  <p class="section-head">🏰 公式サイト</p>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🌊</div>
+    <div class="link-info">
+      <div class="link-title">東京ディズニーシー 公式サイト</div>
+      <div class="link-desc">パークの公式情報はこちらから。チケット購入・予約も</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/attraction.html" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🎢</div>
+    <div class="link-info">
+      <div class="link-title">公式：アトラクション一覧</div>
+      <div class="link-desc">当日の運営状況・待ち時間は公式で確認</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/restaurant/list.html" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🍽️</div>
+    <div class="link-info">
+      <div class="link-title">公式：レストラン一覧</div>
+      <div class="link-desc">営業状況・モバイルオーダー対応確認に</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/food/popcorn_taste.html" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🍿</div>
+    <div class="link-info">
+      <div class="link-title">公式：ポップコーン 味から探す</div>
+      <div class="link-desc">最新フレーバー・販売場所を公式で確認</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/show/schedule/7405/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🎭</div>
+    <div class="link-info">
+      <div class="link-title">公式：ショースケジュール（月次）</div>
+      <div class="link-desc">今日のショー時間はこちら。天候変更にも対応</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/treasure/tds25th/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">✨</div>
+    <div class="link-info">
+      <div class="link-title">公式：25周年スパークリング・ジュビリー</div>
+      <div class="link-desc">イベント内容・グッズ・フード全情報</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/tds/guide.html" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">ℹ️</div>
+    <div class="link-info">
+      <div class="link-title">公式：パークのサービス</div>
+      <div class="link-desc">ロッカー・バリアフリー・救護など全サービス</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <p class="section-head">⏱️ リアルタイム待ち時間・混雑情報</p>
+
+  <a href="https://disney-news.com/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">📊</div>
+    <div class="link-info">
+      <div class="link-title">ディズニー待ち時間（disney-news.com）</div>
+      <div class="link-desc">15分おきに自動更新。完全無料・登録不要。DPA発券状況も確認可</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://disneyreal.asumirai.info/history/disneysea-crowd-calendar.html" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">📅</div>
+    <div class="link-info">
+      <div class="link-title">ディズニーリアル（混雑カレンダー）</div>
+      <div class="link-desc">過去データ基づく混雑予想。A〜F段階で確認</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://yosocal.com/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🗓️</div>
+    <div class="link-info">
+      <div class="link-title">混雑予想カレンダー（yosocal.com）</div>
+      <div class="link-desc">入園者数・スタンバイ時間予想。日付タップで詳細確認</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://magic-tips.app/ja/konzatsu-calendar/tokyo-disney-resort" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🪄</div>
+    <div class="link-info">
+      <div class="link-title">Magic Tips（混雑＆データ分析）</div>
+      <div class="link-desc">リアルタイム×過去データ×AIで精度高い混雑予測</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://urtrip.jp/tds-attraction-waitingtime-data/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🔍</div>
+    <div class="link-info">
+      <div class="link-title">urtrip.jp（アトラクション攻略データ）</div>
+      <div class="link-desc">過去データ分析で空いてる乗車時間を特定。DPA終了時間も</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <p class="section-head">🌐 その他便利サイト</p>
+
+  <a href="https://castel.jp/p/520" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🍿</div>
+    <div class="link-info">
+      <div class="link-title">ポップコーン味・販売場所 完全ガイド（castel.jp）</div>
+      <div class="link-desc">2026年6月最新版。地図付きで全ワゴン解説</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://castel.jp/p/10022" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🎭</div>
+    <div class="link-info">
+      <div class="link-title">ショー全種類ガイド（castel.jp）</div>
+      <div class="link-desc">2026年6月版。全ショーの鑑賞方法・場所・内容まとめ</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://castel.jp/tds/souvenir/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🛍️</div>
+    <div class="link-info">
+      <div class="link-title">お土産グッズ総まとめ（castel.jp）</div>
+      <div class="link-desc">2026年春夏の全グッズ一覧。発売スケジュール付き</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+  <a href="https://www.tokyodisneyresort.jp/special/fantasysprings/" target="_blank" rel="noopener" class="link-card">
+    <div class="link-icon">🏰</div>
+    <div class="link-info">
+      <div class="link-title">ファンタジースプリングス 公式特集</div>
+      <div class="link-desc">FSエリアの全情報。アトラクション・レストラン・グッズ</div>
+    </div>
+    <div class="link-arrow">›</div>
+  </a>
+
+</div><!-- /#tab-links -->
+
+
+<!-- =========================================================
+     TAB 8: 時刻表
+========================================================= -->
+<div id="tab-train" class="tab-panel">
+
+  <div class="info-box">
+    <strong>🚉 最寄り駅：JR 舞浜駅</strong><br>
+    ディズニーシーへは舞浜駅からディズニーリゾートライン（モノレール）で2〜3分。「東京ディズニーシー・ステーション」で下車。
+  </div>
+
+  <p class="section-head">🚆 JR・在来線</p>
+
+  <div class="tt-card">
+    <div class="tt-icon">🚇</div>
+    <div>
+      <div class="tt-title">JR 京葉線（舞浜駅直結）</div>
+      <div class="tt-desc">東京駅〜舞浜駅：約15分。快速利用で時短。帰宅ラッシュ時（20〜22時）は混雑するため早めの帰園がおすすめ</div>
+      <a href="https://www.jreast.co.jp/timetable/" target="_blank" rel="noopener" class="tt-link">🔗 JR東日本 時刻表サイト</a>
+    </div>
+  </div>
+
+  <div class="tt-card">
+    <div class="tt-icon">🚇</div>
+    <div>
+      <div class="tt-title">JR 武蔵野線（舞浜経由）</div>
+      <div class="tt-desc">海浜幕張・府中本町方面からの場合。埼京線からも接続あり</div>
+      <a href="https://www.jreast.co.jp/timetable/" target="_blank" rel="noopener" class="tt-link">🔗 JR東日本 時刻表サイト</a>
+    </div>
+  </div>
+
+  <p class="section-head">🚃 ディズニーリゾートライン（モノレール）</p>
+
+  <div class="tt-card">
+    <div class="tt-icon">🛤️</div>
+    <div>
+      <div class="tt-title">ディズニーリゾートライン</div>
+      <div class="tt-desc">舞浜駅→東京ディズニーシー・ステーション（2〜3分）。パーク間の移動にも使える。1日乗り放題パス：大人¥850・子ども¥430</div>
+      <a href="https://www.tokyodisneyresort.jp/hotel/transit/drl.html" target="_blank" rel="noopener" class="tt-link">🔗 公式：リゾートライン情報</a>
+    </div>
+  </div>
+
+  <p class="section-head">🚌 高速バス・直通バス</p>
+
+  <div class="tt-card">
+    <div class="tt-icon">🚌</div>
+    <div>
+      <div class="tt-title">高速バス各路線（全国各地から）</div>
+      <div class="tt-desc">東京ディズニーリゾート直行バスが全国各地から運行。「バスタ新宿」「横浜」からの路線も便利</div>
+      <a href="https://www.bushikaku.net/search/disneysea/" target="_blank" rel="noopener" class="tt-link">🔗 バス比較サイト（バスHikaku）</a>
+    </div>
+  </div>
+
+  <p class="section-head">🚗 電車時刻検索ツール</p>
+
+  <div class="tt-card">
+    <div class="tt-icon">🔍</div>
+    <div>
+      <div class="tt-title">Yahoo! 路線情報</div>
+      <div class="tt-desc">出発地〜舞浜駅の乗り換え案内。帰りの最終電車確認に</div>
+      <a href="https://transit.yahoo.co.jp/search/print?from=&to=%E8%88%9E%E6%B5%9C&type=1&ws=3&s=0&src=0" target="_blank" rel="noopener" class="tt-link">🔗 舞浜駅への路線検索</a>
+    </div>
+  </div>
+
+  <div class="tt-card">
+    <div class="tt-icon">🚉</div>
+    <div>
+      <div class="tt-title">Google マップ 経路案内</div>
+      <div class="tt-desc">リアルタイムの遅延情報も反映。帰りのルート確認に</div>
+      <a href="https://www.google.co.jp/maps/dir//35.6267,139.8849/@35.6267,139.8849,15z" target="_blank" rel="noopener" class="tt-link">🔗 舞浜エリアのマップ</a>
+    </div>
+  </div>
+
+  <div class="tt-card">
+    <div class="tt-icon">🗾</div>
+    <div>
+      <div class="tt-title">乗り換え案内アプリ（Suica/PASMO）</div>
+      <div class="tt-desc">チャージ残高も確認を。帰り閉園後は1〜2時間以上の帰宅ラッシュになる場合あり</div>
+      <a href="https://www.jreast.co.jp/suica/index.html" target="_blank" rel="noopener" class="tt-link">🔗 Suica 公式</a>
+    </div>
+  </div>
+
+  <!-- 近隣交通アクセス -->
+  <div class="card gold mt12">
+    <div class="card-title"><span class="emoji">🗺️</span>主要駅からの所要時間目安</div>
+    <table class="tbl">
+      <tr><th>出発駅</th><th>経路</th><th>所要時間</th></tr>
+      <tr><td>東京駅</td><td>JR京葉線直通</td><td>約15分</td></tr>
+      <tr><td>新宿駅</td><td>JR中央線→東京→京葉線</td><td>約40分</td></tr>
+      <tr><td>渋谷駅</td><td>JR山手線→東京→京葉線</td><td>約40分</td></tr>
+      <tr><td>横浜駅</td><td>JR京浜東北線→東京→京葉線</td><td>約50分</td></tr>
+      <tr><td>浦安駅</td><td>タクシー（東京メトロ東西線の場合）</td><td>約10〜15分</td></tr>
+      <tr><td>大宮駅</td><td>JR京浜東北線→東京→京葉線</td><td>約70分</td></tr>
+    </table>
+    <div class="sub mt8">※リゾートラインは舞浜駅から乗車（徒歩2分で乗換）</div>
+  </div>
+
+  <div class="warn-box">
+    <strong>🌙 帰り・最終電車について</strong><br>
+    パーク閉園後（21〜22時台）は舞浜駅が非常に混雑。閉園の30分前〜閉園直後に退場すると比較的スムーズ。JR京葉線の最終は東京方面行きで22時台後半〜23時台（曜日により異なる）。公式時刻表で必ず確認を。
+  </div>
+
+</div><!-- /#tab-train -->
+
+</main>
+
+<div class="page-footer">
+  🌊 東京ディズニーシー 完全ガイド 2026年6月29日版<br>
+  ※情報は執筆時点のものです。最新情報は公式サイトで必ずご確認ください。<br>
+  東京ディズニーシー25周年"スパークリング・ジュビリー"開催中（〜2027年3月31日）
+</div>
+
+<script>
+function switchTab(tabId, btn) {
+  // Hide all panels
+  document.querySelectorAll('.tab-panel').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  // Deactivate all buttons
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  // Show target panel
+  var panel = document.getElementById(tabId);
+  if (panel) panel.classList.add('active');
+  // Activate clicked button
+  if (btn) btn.classList.add('active');
+  // Scroll nav to show active button
+  if (btn) {
+    var nav = document.getElementById('tab-nav');
+    var btnLeft = btn.offsetLeft;
+    var btnWidth = btn.offsetWidth;
+    var navWidth = nav.offsetWidth;
+    var scrollTarget = btnLeft - (navWidth / 2) + (btnWidth / 2);
+    nav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+  }
+  // Scroll content to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// On load: scroll nav to show first tab
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('tab-nav');
+  if (nav) nav.scrollLeft = 0;
+});
+</script>
+
+</body>
+</html>
